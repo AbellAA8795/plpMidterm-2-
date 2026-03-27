@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/058a85c92d.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../CSS_Files/roulette.css">
+    <title>Roulette Game</title>
+</head>
+<body>
+    <nav class="nav-container">
+        <div>
+            <div class="circular-frame"><i style="color: aliceblue; font-size: 25px; " class="fa-solid fa-bars"></i></div>
+            <div class="circular-frame"> <i style="color: aliceblue; font-size: 25px; " class="fa-solid fa-volume"></i></div>
+        </div>
+        <div>
+            <div class="name-currency">
+                <i class="fa-solid fa-user" style="margin: 0 10px;"></i>
+                <p style="display: inline; padding-right: 10px; font-size: 14px;" >Username1</p>   
+            </div>
+            <div class="name-currency">
+                <p id="userBalance" style="margin: 0 10px; font-size: 14px;">₱ 10000</p>  
+            </div>    
+            <div class="name-currency">
+                <p id="userElo" style="margin: 0 10px; font-size: 14px;">0</p>  
+            </div>  
+        </div>
+        </nav>
+    <div class="game-container">
+        <div class="game-rules box" style="grid-area: left;" >
+            <h1 style="text-align: center;">Game Rules</h1>
+            <table style="border-collapse: collapse;">
+                <tr>
+                    <th>Betting Option</th>
+                    <th>Description</th>
+                    <th>Points</th>
+                </tr>
+                <tr>
+                    <td>Low Bet</td>
+                    <td>The Result is around 1 - 15</td>
+                    <td>x2</td>
+                </tr>
+                <tr>
+                    <td>High Bet</td>
+                    <td>The Result is around 16 - 30</td>
+                    <td>x2</td>
+                </tr>
+                <tr>
+                    <td>Prime</td>
+                    <td>The Result is 2,3,5,7,11,13,17,19,23,29</td>
+                    <td>x3</td>
+                </tr>
+                <tr>
+                    <td>Odd</td>
+                    <td>The Result is 1,3,5,7,9,11,13,15,17,19,21,23,25,27,29</td>
+                    <td>x2</td>
+                </tr>
+                <tr>
+                    <td>Even</td>
+                    <td>The Result is 2,4,6,8,10,12,14,16,18,20,22,24,26,28,30</td>
+                    <td>x2</td>
+                </tr>
+                <tr>
+                    <td>Time Travel</td>
+                    <td>The Result is the same with previous</td>
+                    <td>x30</td>
+                </tr>
+                <tr>
+                    <td>Peak</td>
+                    <td>The Result is 30</td>
+                    <td>x30</td>
+                </tr>
+                <tr>
+                    <td>Valley</td>
+                    <td>The Result is 1</td>
+                    <td>x30</td>
+                </tr>
+                <tr>
+                    <td>First Range</td>
+                    <td>The Result is 1-10</td>
+                    <td>x2</td>
+                </tr>
+                <tr>
+                    <td>Second Range</td>
+                    <td>The Result is 11-20</td>
+                    <td>x2</td>
+                </tr>
+                <tr>
+                    <td>Third Range</td>
+                    <td>The Result is 21-30</td>
+                    <td>x2</td>
+                </tr>
+                <tr>
+                    <td>Lucky 7</td>
+                    <td>The result is 7 or divisible by 7</td>
+                    <td>if 7 = x20 <br> if divisible by 7 = 10x</td>
+                </tr>
+            </table>
+        </div>
+        <div class="content" style="grid-area: middle; width: 550px;">
+            <div class="roulette" style="height: 500px;">
+                <h1>Roulette Wheel</h1>
+                <div style="position: relative; display: inline-block;">
+                    <div class="pointer"></div>
+                    <div class="roulette-wheel" id="wheel"></div>
+                </div>
+                <div class="result" id="result"></div>
+            </div>
+            <div class="betting-input box" style="width: 550px; height: 50px; border-radius: 10px; display: inline-flex; justify-content: space-evenly; align-items: center;">
+                <form action="">
+                    <label for="">Bet Amount:</label>
+                    <input type="text" style="width: 200px; margin: 0 10px; height: 25px;">
+                    <input type="submit" value="Submit" style="width: 100px; height: 25px;">
+                </form>
+            </div>
+        </div>
+        <div class="game-history box" style="grid-area: right;">
+            <div class="game-options">
+                <div class="header-section" style="display: inline-flex; justify-content: space-between; align-items: center; padding: 0 30px;">
+                    <h2>Betting Options</h2>
+                    <i class="fa-solid fa-clock-rotate-left" style="color: white;"></i>
+                </div>
+                <div class="game-buttons">
+                    <button type="button">Low Bet</button>
+                    <button type="button">High Bet</button>
+                    <button type="button">Prime</button>
+                    <button type="button">Odd</button>
+                    <button type="button">Even</button>
+                    <button type="button">Time Travel</button>
+                    <button type="button">Peak</button>
+                    <button type="button">Valley</button>
+                    <button type="button">First Range</button>
+                    <button type="button">Second Range</button>
+                    <button type="button">Third Range</button>
+                    <button type="button">Luck 7</button>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    <script src="../JavaScript/roulette.js"></script>
+</body>
+</html>

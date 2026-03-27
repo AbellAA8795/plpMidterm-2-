@@ -1,0 +1,180 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    /*background: radial-gradient(circle at top, #3c0000, #000);*/
+    background-image: conic-gradient(rgba(0,0,0,0.7),rgba(0,0,0,0.7)),url("asino.png");
+    background-size: cover;
+    background-position: center;
+    font-family: 'Inter', sans-serif;
+    height: 100vh;
+    color: white;
+}
+/* NAVIGATION */
+.nav-container {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 70px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 2rem;
+    background: transparent;
+    
+    z-index: 10;
+}
+.circular-frame {
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(5px);
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 10px;
+    cursor: pointer;
+}
+.name-currency{
+    width: auto;
+    height: 40px;
+    margin-right: 20px;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: white;
+    display: inline-flex;
+    justify-items: space-evenly;
+    align-items: center;
+}
+.game-container {
+    display: grid;
+    grid-template-areas: 
+    "left left middle middle right right";
+    align-items: center;
+    width: 100%;
+    justify-content: center;
+    height: 100%;
+    gap: 50px;
+}
+
+.content{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    padding-top: 40px;
+}
+
+.box{
+    background: rgba(85, 85, 85, 0.2);
+    box-shadow: 0PX 2PX 10px rgb(0, 0, 0);
+    backdrop-filter: blur(20px);
+    width: auto;
+    height: 600px;
+    margin-top: 40px;
+}
+
+.game-rules{
+    width: 450px;
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    padding: 10px;
+    border-radius: 10px;
+}
+.game-rules table,tr,td,th{
+    
+    font-size: 13px;
+    text-align: center;
+}
+.game-rules table{
+    height: 90%;
+}
+
+.game-history{
+    width: 400px;
+    border-radius: 10px;
+}
+
+.game-options{
+    display: flex;
+    flex-direction: column;
+}
+
+.game-options .header-section{
+    width: 100%;
+    height: 53px;
+}
+
+.game-buttons {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 0px;
+}
+
+.game-buttons button{
+    width: 100%;
+    height: 45px;
+    background-color: transparent;
+    border: none;
+    color: aliceblue;
+    transition: all 0.15s ease;
+    cursor: pointer;
+    font-size: 16px;
+    padding: 0;
+    margin: 0;
+}
+
+.game-buttons button:hover{
+    background-color: white;
+    color: black;
+}
+
+.game-buttons button.active {
+    background-color: #00ff00;
+    color: black;
+    font-weight: bold;
+}
+
+.game-buttons button.active:hover {
+    background-color: #00ff00;
+    color: black;
+}
+
+.dice-game{
+    width: 560px;
+    height: 500px;
+    background: rgba(85, 85, 85, 0.2);
+    box-shadow: 0PX 2PX 10px rgb(0, 0, 0);
+    backdrop-filter: blur(20px);
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    text-align: center;
+}
+
+.dice1,.dice2{
+    width: 250px;
+    height: 250px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+    margin: 20px;
+}
+
