@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../CSS_Files/homes.css">
+    <script src="https://kit.fontawesome.com/058a85c92d.js" crossorigin="anonymous"></script>
+    <title>Homepage</title>
+</head>
+<body>
+        <nav class="nav-container">
+        <div>
+            <div class="circular-frame"><i style="color: aliceblue; font-size: 25px; " class="fa-solid fa-bars"></i></div>
+            <div id="musicBtn" onclick="toggleMusic()" class="circular-frame"><i class="fa-solid fa-volume-xmark"></i></div>
+            
+               <audio id="bgMusic" autoplay loop>
+                    <source src="Saffron.mp3" type="audio/mpeg">
+               </audio>
+        </div>
+        
+        
+        <div>
+            <div class="name-currency">
+                <i class="fa-solid fa-user" style="margin: 0 10px;"></i>
+                <p style="display: inline; padding-right: 10px; font-size: 14px;" >Username1</p> 
+                
+            </div>
+            <div class="name-currency">
+                <p style="margin: 0 10px; font-size: 14px;">₱ 10000</p>  
+            </div>    
+            <div class="name-currency">
+                <p style="margin: 0 10px; font-size: 14px;">₱ 10000</p>  
+            </div>  
+        </div>
+        
+        </nav>
+    <div class="grid-parent">
+        <div class="content">
+            <h1 class="app-title">WELCOME PLAYER</h1>
+            
+            <a href="roulette.html" style="font-style: none;"><button class="pixel-button">ROULETTE</button></a>
+            <button class="pixel-button">COLOR MATCHING</button>
+            <button class="pixel-button">DICE PATTERN</button>
+            <button class="pixel-button">TUTORIAL</button>
+        </div>
+    </div>
+
+    <script>
+        const music = document.getElementById("bgMusic");
+        const btn = document.getElementById("musicBtn");
+
+        function toggleMusic() {
+            if (music.paused) {
+                music.play();
+                btn.innerHTML = '<i class="fa-solid fa-volume-high"></i>';
+            } else {
+                music.pause();
+                btn.innerHTML = '<i class="fa-solid fa-volume-xmark"></i>';
+            }
+        }
+    </script>
+</body>
+</html>

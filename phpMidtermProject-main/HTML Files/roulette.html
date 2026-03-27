@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/058a85c92d.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../CSS_Files/roulette.css">
+    <title>Roulette Game</title>
+</head>
+<body>
+    <nav class="nav-container">
+        <div>
+            <div class="circular-frame" style="font-size: 25px;"><i class="fa-solid fa-house"></i></div>
+            
+            <div class="circular-frame"> <i style="color: aliceblue; font-size: 25px; " class="fa-solid fa-volume"></i></div>
+        </div>
+        <div class="right-navigation">
+            <div class="name-currency">
+                <i class="fa-solid fa-user" style="margin: 0 10px;"></i>
+                <p style="display: inline; padding-right: 10px; font-size: 14px;" >Username1</p> 
+                
+            </div>
+            <div class="name-currency">
+                <p style="margin: 0 10px; font-size: 14px;" id="userBalance">₱ 10000</p>  
+            </div>    
+            <div class="name-currency">
+                <p style="margin: 0 10px; font-size: 14px;" id="userElo">0</p>  
+            </div>
+            <div class="hamburger-container">
+                <div class="circular-frame" id="hamburgerIcon"><i style="color: aliceblue; font-size: 25px; " class="fa-solid fa-bars"></i></div>
+                <div class="dropdown-menu" id="dropdownMenu">
+                    <button class="dropdown-item" id="tutorialButton">Tutorial</button>
+                    <button class="dropdown-item">Game History</button>
+                    <button class="dropdown-item">Logout</button>
+                </div>
+            </div>
+        </div>
+        
+    </nav>
+    <div class="game-container">
+        <div class="game-rules box1" style="grid-area: left;" >
+            
+            <table style="border-collapse: collapse;">
+                <tr>
+                    <th colspan="3" style="font-size: 30px;">Game Rules</th>
+                </tr>
+                <tr>
+                    <th>Betting Option</th>
+                    <th>Description</th>
+                    <th>Points</th>
+                </tr>
+                <tr>
+                    <td>Low Bet</td>
+                    <td>Numbers 1 - 15</td>
+                    <td>x2</td>
+                </tr>
+                <tr>
+                    <td>High Bet</td>
+                    <td>Numbers 16 - 30</td>
+                    <td>x2</td>
+                </tr>
+                <tr>
+                    <td>Prime</td>
+                    <td>2,3,5,7,11,13,17,19,23,29</td>
+                    <td>x3</td>
+                </tr>
+                <tr>
+                    <td>Odd</td>
+                    <td>1,3,5,7,9,11,13,15,17,19,21,23,25,27,29</td>
+                    <td>x2</td>
+                </tr>
+                <tr>
+                    <td>Even</td>
+                    <td>2,4,6,8,10,12,14,16,18,20,22,24,26,28,30</td>
+                    <td>x2</td>
+                </tr>
+                <tr>
+                    <td>Time Travel</td>
+                    <td>Previous Winning Number</td>
+                    <td>x30</td>
+                </tr>
+                <tr>
+                    <td>Peak</td>
+                    <td>Last number of the Wheel</td>
+                    <td>x30</td>
+                </tr>
+                <tr>
+                    <td>Valley</td>
+                    <td>First number of the Wheel</td>
+                    <td>x30</td>
+                </tr>
+                <tr>
+                    <td>First Range</td>
+                    <td>Numbers 1-10</td>
+                    <td>x2</td>
+                </tr>
+                <tr>
+                    <td>Second Range</td>
+                    <td>Numbers 11-20</td>
+                    <td>x2</td>
+                </tr>
+                <tr>
+                    <td>Third Range</td>
+                    <td>Numbers 21-30</td>
+                    <td>x2</td>
+                </tr>
+                <tr>
+                    <td>Lucky 7</td>
+                    <td>The Number is 7 or divisible by 7</td>
+                    <td>7=x20 <br> divisible by 7=10x</td>
+                </tr>
+            </table>
+        </div>
+        <div class="content" style="grid-area: middle; width: 550px;">
+            <div class="roulette" style="height: 450px;">
+                <h1>Roulette Wheel</h1>
+                <div style="position: relative; display: inline-block;">
+                    <div class="pointer"></div>
+                    <div class="roulette-wheel" id="wheel"></div>
+                </div>
+                <div class="result" id="result"></div>
+            </div>
+            <div class="betting-input box">
+                <form action="">
+                    <label for="">Bet Amount:</label>
+                    <input type="text" style="width: 200px; margin: 0 10px; height: 25px;">
+                    <input type="submit" value="Submit" style="width: 100px; height: 25px;">
+                </form>
+            </div>
+        </div>
+        <div class="game-history box1" style="grid-area: right;">
+            <div class="game-options">
+                <div class="header-section" style="text-align: center;">
+                    <h2>Betting Options</h2>
+                </div>
+                <div class="game-buttons">
+                    <button type="button">Low Bet</button>
+                    <button type="button">High Bet</button>
+                    <button type="button">Prime</button>
+                    <button type="button">Odd</button>
+                    <button type="button">Even</button>
+                    <button type="button">Time Travel</button>
+                    <button type="button">Peak</button>
+                    <button type="button">Valley</button>
+                    <button type="button">First Range</button>
+                    <button type="button">Second Range</button>
+                    <button type="button">Third Range</button>
+                    <button type="button">Luck 7</button>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+
+    <!-- Tutorial Modal -->
+    <div id="tutorialModal" class="tutorial-modal">
+        <div class="tutorial-overlay"></div>
+        <div class="tutorial-card">
+            <button class="tutorial-close-btn" id="closeModal">&times;</button>
+            
+            <div class="tutorial-content">
+                <!-- Slide content will be displayed here -->
+                
+            </div>
+            
+            <div class="tutorial-slider-controls">
+                <button class="tutorial-arrow" id="prevSlide"><i class="fa-solid fa-chevron-left"></i></button>
+                
+                <div class="tutorial-indicator">
+                    <span id="slideNumber">1</span> / <span>3</span>
+                </div>
+                
+                <button class="tutorial-arrow" id="nextSlide"><i class="fa-solid fa-chevron-right"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Game History Modal -->
+    <div id="gameHistoryModal" class="modal hidden">
+        <div class="modal-content">
+            
+            <button class="close-button">&times;</button>
+            <h2 style="margin-top: 20px;">Game History</h2>
+            <div class="table-container"></div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Option</th>
+                        <th>Tally</th>
+                        <th>Frequency</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>2</td>
+                        <td>0</td>
+                        <td>0%</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>0</td>
+                        <td>0%</td>
+                    </tr>
+                    <!-- Add more rows as needed -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="../JavaScript/roulette.js"></script>
+</body>
+</html>

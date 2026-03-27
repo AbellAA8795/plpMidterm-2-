@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../CSS_Files/color-matching.css">
+    <script src="https://kit.fontawesome.com/058a85c92d.js" crossorigin="anonymous"></script>
+    <script src="../JavaScript/color-match.js"></script>
+    <title>Color Matching Game</title>
+</head>
+<body>
+    
+    <nav class="nav-container">
+        <div>
+            <div class="circular-frame" style="font-size: 25px;"><i class="fa-solid fa-house"></i></div>
+            
+            <div class="circular-frame"> <i style="color: aliceblue; font-size: 25px; " class="fa-solid fa-volume"></i></div>
+        </div>
+        <div class="right-navigation">
+            <div class="name-currency">
+                <i class="fa-solid fa-user" style="margin: 0 10px;"></i>
+                <p style="display: inline; padding-right: 10px; font-size: 14px;" >Username1</p> 
+                
+            </div>
+            <div class="name-currency">
+                <img src="../CSS_Files/Crystalline-Points.png" alt="" srcset="" style="width: 20px; height: 20px; margin: 0 10px;">
+                <p style="margin: 0 10px; font-size: 14px;" id="userBalance">10000</p>  
+            </div>    
+            <div class="name-currency">
+                <p style="margin: 0 10px; font-size: 14px;" id="userElo">0</p>  
+            </div>
+            <div class="hamburger-container">
+                <div class="circular-frame" id="hamburgerIcon"><i style="color: aliceblue; font-size: 25px; " class="fa-solid fa-bars"></i></div>
+                <div class="dropdown-menu" id="dropdownMenu">
+                    <button class="dropdown-item" id="tutorialButton">Tutorial</button>
+                    <button class="dropdown-item">Game History</button>
+                    <button class="dropdown-item">Logout</button>
+                </div>
+            </div>
+        </div>
+        
+    </nav>
+        
+        </nav>
+
+        <div class="content">
+            <div class="left-container">
+                <div class="game-rules box1">
+                    <h1 style="text-align: center;">Game Rules</h1>
+                    <table style="border-collapse: collapse;">
+                        <tr>
+                            <th>Betting Option</th>
+                            <th>Description</th>
+                            <th>Crystaline Points</th>
+                        </tr>
+                        <tr>
+                            <td>Red</td>
+                            <td>At least 1 of the dice is red.</td>
+                            <td rowspan="6">Matches: <br>
+                                1 match = x2 points<br>
+                                2 matches = x5 points<br>
+                                3 matches = x15 points<br>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Pink</td>
+                            <td>At least 1 of the dice is pink.</td>
+                        </tr>
+                        <tr>
+                            <td>Yellow</td>
+                            <td>At least 1 of the dice is yellow.</td>
+                        </tr>
+                        <tr>
+                            <td>Blue</td>
+                            <td>At least 1 of the dice is blue.</td>
+                        </tr>
+                        <tr>
+                            <td>Green</td>
+                            <td>At least 1 of the dice is green.</td>
+                        </tr>
+                        <tr>
+                            <td>White</td>
+                            <td>At least 1 of the dice is white.</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="game-bet-amount box1">
+                    <h2 style="text-align: center; margin-bottom: 10px;">Bet Amount</h2>
+                    <form id="betForm">
+                        <label for="betAmount">Enter Amount:</label>
+                        <input type="text" id="betAmount" required>
+                        <input type="submit" value="Submit">
+                    </form>
+                </div>
+            </div>
+            <div class="right-container">
+                <div class="game-inaction box">
+                    <h3 style="text-align: center; margin-bottom: 20px;">Game In Action</h3>
+                    <div class="dice-container">
+                        <div class="dice" id="color1" style="background-color: #888;"></div>
+                        <div class="dice" id="color2" style="background-color: #888;"></div>
+                        <div class="dice" id="color3" style="background-color: #888;"></div>
+                    </div>
+                </div>
+                <div class="game-options box1">
+                    <h1 style="text-align: center;">Game Options</h1>
+                    <div class="options-container">
+                        <div class="options game-button" data-color="red" style="grid-area: opt1; background-color: red; cursor: pointer; transition: all 0.3s ease;">
+                            <h2>Red</h2>
+                        </div>
+                        <div class="options game-button" data-color="pink" style="grid-area: opt2; background-color: pink; cursor: pointer; transition: all 0.3s ease;">
+                            <h2>Pink</h2>
+                        </div>
+                        <div class="options game-button" data-color="yellow" style="grid-area: opt3; background-color: yellow; cursor: pointer; transition: all 0.3s ease;">
+                            <h2 style="color: black;">Yellow</h2>
+                        </div>
+                        <div class="options game-button" data-color="blue" style="grid-area: opt4; background-color: blue; cursor: pointer; transition: all 0.3s ease;">
+                            <h2>Blue</h2>
+                        </div>
+                        <div class="options game-button" data-color="green" style="grid-area: opt5; background-color: green; cursor: pointer; transition: all 0.3s ease;">
+                            <h2>Green</h2>
+                        </div>
+                        <div class="options game-button" data-color="white" style="grid-area: opt6; background-color: white; cursor: pointer; transition: all 0.3s ease;">
+                            <h2 style="color: black;">White</h2>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+
+        <!-- Tutorial Modal -->
+    <div id="tutorialModal" class="tutorial-modal">
+        <div class="tutorial-overlay"></div>
+        <div class="tutorial-card">
+            <button class="tutorial-close-btn" id="closeModal">&times;</button>
+            
+            <div class="tutorial-content">
+                <!-- Slide content will be displayed here -->
+                
+            </div>
+            
+            <div class="tutorial-slider-controls">
+                <button class="tutorial-arrow" id="prevSlide"><i class="fa-solid fa-chevron-left"></i></button>
+                
+                <div class="tutorial-indicator">
+                    <span id="slideNumber">1</span> / <span>3</span>
+                </div>
+                
+                <button class="tutorial-arrow" id="nextSlide"><i class="fa-solid fa-chevron-right"></i></button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Game History Modal -->
+    <div id="gameHistoryModal" class="modal hidden">
+        <div class="modal-content">
+            
+            <button class="close-button">&times;</button>
+            <h2 style="margin-top: 20px;">Game History</h2>
+            <div class="table-container"></div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Option</th>
+                        <th>Tally</th>
+                        <th>Frequency</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>2</td>
+                        <td>0</td>
+                        <td>0%</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>0</td>
+                        <td>0%</td>
+                    </tr>
+                    <!-- Add more rows as needed -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

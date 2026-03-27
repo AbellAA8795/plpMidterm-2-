@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dice Game</title>
+    <link rel="stylesheet" href="../CSS_Files/dice.css">
+    <script src="https://kit.fontawesome.com/058a85c92d.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <nav class="nav-container">
+        <div>
+            <div class="circular-frame" style="font-size: 25px;"><i class="fa-solid fa-house"></i></div>
+            
+            <div class="circular-frame"> <i style="color: aliceblue; font-size: 25px; " class="fa-solid fa-volume"></i></div>
+        </div>
+        <div class="right-navigation">
+            <div class="name-currency">
+                <i class="fa-solid fa-user" style="margin: 0 10px;"></i>
+                <p style="display: inline; padding-right: 10px; font-size: 14px;" >Username1</p> 
+                
+            </div>
+            <div class="name-currency">
+                <img src="../CSS_Files/Crystalline-Points.png" alt="" srcset="" style="width: 20px; height: 20px; margin: 0 10px;">
+                <p style="margin: 0 10px; font-size: 14px;" id="userBalance"> 10000</p>  
+            </div>    
+            <div class="name-currency">
+                <p style="margin: 0 10px; font-size: 14px;" id="userElo">0</p>  
+            </div>
+            <div class="hamburger-container">
+                <div class="circular-frame" id="hamburgerIcon"><i style="color: aliceblue; font-size: 25px; " class="fa-solid fa-bars"></i></div>
+                <div class="dropdown-menu" id="dropdownMenu">
+                    <button class="dropdown-item" id="tutorialButton">Tutorial</button>
+                    <button class="dropdown-item">Game History</button>
+                    <button class="dropdown-item">Logout</button>
+                </div>
+            </div>
+        </div>
+        
+    </nav>
+    <div class="game-container">
+        <div class="game-rules box1" style="grid-area: left;" >
+            <table style="border-collapse: collapse; ">
+                <tr>
+                    <th colspan="2" style="font-size: 30px;">Game Rules</th>
+                </tr>
+                <tr>
+                    <th>Betting Option</th>
+                    <th>Points</th>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td style = "padding:0 30px;">x30</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td style = "padding:0 30px;">x15</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td style = "padding:0 30px;">x10</td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td style = "padding:0 30px;">x8</td>
+                </tr>
+                <tr>
+                    <td>6</td>
+                    <td style = "padding:0 30px;">x6</td>
+                </tr>
+                <tr>
+                    <td>7</td>
+                    <td style = "padding:0 30px;">x5</td>
+                </tr>
+                <tr>
+                    <td>8</td>
+                    <td style = "padding:0 30px;">x6</td>
+                </tr>
+                <tr>
+                    <td>9</td>
+                    <td style = "padding:0 30px;">x8</td>
+                </tr>
+                <tr>
+                    <td>10</td>
+
+                    <td style = "padding:0 30px;">x10</td>
+                </tr>
+                <tr>
+                    <td>11</td>
+                    <td style = "padding:0 30px;">x15</td>
+                </tr>
+                <tr>
+                    <td>12</td>
+                    <td style = "padding:0 30px;">x30</td>
+                </tr>
+                
+            </table>
+        </div>
+        <div class="content" style="grid-area: middle; width: 550px;">
+            <h1 style="margin-bottom:10px;">Dice Game</h1>
+            <div class="dice-game">
+                    <div>
+                        <h1>Dice 1</h1>
+                        <div class="dice1" id="dice1-display">
+                            <img id="dice1-image" src="../dice/1.png" alt="Dice 1" height="240px">
+                        </div>
+                        <h1 id="dice1-value">1</h1>
+                    </div>
+                    
+                    <div>
+                        <h1>Dice 2</h1>
+                        <div class="dice2" id="dice2-display">
+                            <img id="dice2-image" src="../dice/2.png" alt="Dice 2" height="240px">
+                        </div>
+                        <h1 id="dice2-value">2</h1>
+                    </div>
+            </div>
+            <div class="betting-input box1" >
+                <form id="betForm">
+                    <label for="betAmount">Bet Amount:</label>
+                    <input type="text" id="betAmount" style="width: 200px; margin: 0 10px; height: 25px;">
+                    <input type="submit" value="Submit" style="width: 100px; height: 25px;">
+                </form>
+            </div>
+        </div>
+        <div class="game-history box1" style="grid-area: right;">
+            <div class="game-options">
+                <div class="header-section">
+                    <h2 style="text-align: center; margin-top: 10px;">Betting Options</h2>
+                    
+                </div>
+                <div class="game-buttons">
+                    <button type="button">2</button>
+                    <button type="button">3</button>
+                    <button type="button">4</button>
+                    <button type="button">5</button>
+                    <button type="button">6</button>
+                    <button type="button">7</button>
+                    <button type="button">8</button>
+                    <button type="button">9</button>
+                    <button type="button">10</button>
+                    <button type="button">11</button>
+                    <button type="button">12</button>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+
+    <!-- Tutorial Modal -->
+    <div id="tutorialModal" class="tutorial-modal">
+        <div class="tutorial-overlay"></div>
+        <div class="tutorial-card">
+            <button class="tutorial-close-btn" id="closeModal">&times;</button>
+            
+            <div class="tutorial-content">
+                <!-- Slide content will be displayed here -->
+                
+            </div>
+            
+            <div class="tutorial-slider-controls">
+                <button class="tutorial-arrow" id="prevSlide"><i class="fa-solid fa-chevron-left"></i></button>
+                
+                <div class="tutorial-indicator">
+                    <span id="slideNumber">1</span> / <span>3</span>
+                </div>
+                
+                <button class="tutorial-arrow" id="nextSlide"><i class="fa-solid fa-chevron-right"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Game History Modal -->
+    <div id="gameHistoryModal" class="modal hidden">
+        <div class="modal-content">
+            
+            <button class="close-button">&times;</button>
+            <h2 style="margin-top: 20px;">Game History</h2>
+            <div class="table-container"></div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Option</th>
+                        <th>Tally</th>
+                        <th>Frequency</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>2</td>
+                        <td>0</td>
+                        <td>0%</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>0</td>
+                        <td>0%</td>
+                    </tr>
+                    <!-- Add more rows as needed -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="../JavaScript/dice.js"></script>
+</body>
+</html>
