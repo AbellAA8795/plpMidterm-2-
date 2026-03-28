@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dice Game</title>
+    <link rel="stylesheet" href="../CSS_Files/dice.css">
+    <script src="https://kit.fontawesome.com/058a85c92d.js" crossorigin="anonymous"></script>
+    <style>
+        /* ── Game History Modal ── */
+        .modal { display:flex; position:fixed; inset:0; z-index:10000; align-items:center; justify-content:center; background:rgba(0,0,0,0.75); }
+        .modal.hidden { display:none; }
+        .modal-content { background:#1a1a2e; border:2px solid #f0c040; border-radius:12px; padding:28px 24px; max-width:500px; width:95%; max-height:80vh; overflow-y:auto; color:white; position:relative; }
+        .modal-content h2 { text-align:center; color:#f0c040; margin-bottom:16px; }
+        .close-button { position:absolute; top:12px; right:16px; background:none; border:none; color:#ccc; font-size:24px; cursor:pointer; }
+        .close-button:hover { color:white; }
+        .modal-content table { width:100%; border-collapse:collapse; font-size:14px; }
+        .modal-content table th { background:#0d0d1f; color:#f0c040; padding:10px 12px; border-bottom:2px solid #f0c040; text-align:left; }
+        .modal-content table td { padding:8px 12px; border-bottom:1px solid #2a2a4a; }
+        .modal-content table tr:hover td { background:rgba(255,255,255,0.04); }
+    </style>
+</head>
+<body>
+    <nav class="nav-container">
+        <div>
+            <a href="homepage.html" class="circular-frame" style="font-size:25px;text-decoration:none;cursor:pointer;"><i class="fa-solid fa-house"></i></a>
+            <div class="circular-frame"><i style="color:aliceblue;font-size:25px;" class="fa-solid fa-volume"></i></div>
+        </div>
+        <div class="right-navigation">
+            <div class="name-currency">
+                <i class="fa-solid fa-user" style="margin:0 10px;"></i>
+                <p style="display:inline;padding-right:10px;font-size:14px;">Username1</p>
+                <i class="fa-solid fa-tv" id="watchAdNavBtn" title="Watch Ad for +100" style="margin:0 6px;cursor:pointer;color:#f0c040;font-size:16px;transition:transform 0.2s;" onclick="showAdPopup()"></i>
+            </div>
+            <div class="name-currency">
+                <img src="../CSS_Files/Crystalline-Points.png" alt="" style="width:20px;height:20px;margin:0 10px;">
+                <p style="margin:0 10px;font-size:14px;" id="userBalance">0</p>
+            </div>
+            <div class="name-currency">
+                <p style="margin:0 10px;font-size:14px;" id="userElo">0</p>
+            </div>
+            <div class="hamburger-container">
+                <div class="circular-frame" id="hamburgerIcon"><i style="color:aliceblue;font-size:25px;" class="fa-solid fa-bars"></i></div>
+                <div class="dropdown-menu" id="dropdownMenu">
+                    <button class="dropdown-item" id="tutorialButton">Tutorial</button>
+                    <button class="dropdown-item">Game History</button>
+                    <button class="dropdown-item">Probability</button>
+                    <button class="dropdown-item">Logout</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="game-container">
+        <div class="game-rules box1" style="grid-area:left;">
+            <table style="border-collapse:collapse;">
+                <tr><th colspan="2" style="font-size:30px;">Game Rules</th></tr>
+                <tr><th>Betting Option</th><th>Points</th></tr>
+                <tr><td>2</td><td style="padding:0 30px;">x30</td></tr>
+                <tr><td>3</td><td style="padding:0 30px;">x15</td></tr>
+                <tr><td>4</td><td style="padding:0 30px;">x10</td></tr>
+                <tr><td>5</td><td style="padding:0 30px;">x8</td></tr>
+                <tr><td>6</td><td style="padding:0 30px;">x6</td></tr>
+                <tr><td>7</td><td style="padding:0 30px;">x5</td></tr>
+                <tr><td>8</td><td style="padding:0 30px;">x6</td></tr>
+                <tr><td>9</td><td style="padding:0 30px;">x8</td></tr>
+                <tr><td>10</td><td style="padding:0 30px;">x10</td></tr>
+                <tr><td>11</td><td style="padding:0 30px;">x15</td></tr>
+                <tr><td>12</td><td style="padding:0 30px;">x30</td></tr>
+            </table>
+        </div>
+
+        <div class="content" style="grid-area:middle;width:550px;">
+            <h1 style="margin-bottom:10px;">Dice Game</h1>
+            <div class="dice-game">
+                <div>
+                    <h1>Dice 1</h1>
+                    <div class="dice1" id="dice1-display">
+                        <img id="dice1-image" src="../dice/1.png" alt="Dice 1" height="240px">
+                    </div>
+                    <h1 id="dice1-value">1</h1>
+                </div>
+                <div>
+                    <h1>Dice 2</h1>
+                    <div class="dice2" id="dice2-display">
+                        <img id="dice2-image" src="../dice/2.png" alt="Dice 2" height="240px">
+                    </div>
+                    <h1 id="dice2-value">2</h1>
+                </div>
+            </div>
+            <div class="betting-input box1">
+                <form id="betForm">
+                    <label for="betAmount">Bet Amount:</label>
+                    <input type="text" id="betAmount" inputmode="decimal" placeholder="0.00" style="width:200px;margin:0 10px;height:25px;">
+                    <input type="submit" value="Submit" style="width:100px;height:25px;">
+                </form>
+            </div>
+        </div>
+
+        <div class="game-history box1" style="grid-area:right;">
+            <div class="game-options">
+                <div class="header-section">
+                    <h2 style="text-align:center;margin-top:10px;">Betting Options</h2>
+                </div>
+                <div class="game-buttons">
+                    <button type="button">2</button>
+                    <button type="button">3</button>
+                    <button type="button">4</button>
+                    <button type="button">5</button>
+                    <button type="button">6</button>
+                    <button type="button">7</button>
+                    <button type="button">8</button>
+                    <button type="button">9</button>
+                    <button type="button">10</button>
+                    <button type="button">11</button>
+                    <button type="button">12</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tutorial Modal -->
+    <div id="tutorialModal" class="tutorial-modal">
+        <div class="tutorial-overlay"></div>
+        <div class="tutorial-card">
+            <button class="tutorial-close-btn" id="closeModal">&times;</button>
+            <div class="tutorial-content"></div>
+            <div class="tutorial-slider-controls">
+                <button class="tutorial-arrow" id="prevSlide"><i class="fa-solid fa-chevron-left"></i></button>
+                <div class="tutorial-indicator"><span id="slideNumber">1</span> / <span>3</span></div>
+                <button class="tutorial-arrow" id="nextSlide"><i class="fa-solid fa-chevron-right"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Game History Modal -->
+    <div id="gameHistoryModal" class="modal hidden" style="display:none;">
+        <div class="modal-content">
+            <button class="close-button">&times;</button>
+            <h2>Dice — Game History</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Result</th>
+                        <th>Dice Total</th>
+                        <th>Date Played</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td colspan="3" style="text-align:center;color:#aaa;">Click "Game History" to load records.</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Probability Modal -->
+    <div id="probabilityModal" class="modal hidden" style="display:none;">
+        <div class="modal-content" style="max-width:600px;">
+            <button class="close-button" id="closeProbabilityModal">&times;</button>
+            <h2>📊 Dice — Probability</h2>
+            <p style="text-align:center;color:#aaa;font-size:13px;margin-bottom:14px;">Based on your game history (last 50 rounds)</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Sum</th>
+                        <th>Times Rolled</th>
+                        <th>Frequency</th>
+                        <th>Win Rate (if bet)</th>
+                        <th>Multiplier</th>
+                    </tr>
+                </thead>
+                <tbody id="probabilityTableBody">
+                    <tr><td colspan="5" style="text-align:center;color:#aaa;">Click "Probability" to load stats.</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="../JavaScript/dice.js"></script>
+    <script src="../JavaScript/user-info.js"></script>
+</body>
+</html>

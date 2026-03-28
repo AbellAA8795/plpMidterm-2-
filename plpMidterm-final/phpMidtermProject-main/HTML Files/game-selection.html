@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Selection</title>
+</head>
+<body>
+
+    <button onclick="toggleMusic()">Play / Pause Music</button>
+
+    <!-- Audio file -->
+    <audio id="bgMusic" autoplay loop>
+        <source src="../Assets/Saffron.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        const music = document.getElementById("bgMusic");
+        let isPlaying = false;
+
+        function toggleMusic() {
+            if (isPlaying) {
+                music.pause();
+                isPlaying = false;
+            } else {
+                music.play();
+                isPlaying = true;
+            }
+        }
+    </script>
+
+    <!-- <div class="container">
+        <div class="roulette-game"></div>
+        <div class="dice-game"></div>
+        <div class="color-matching-game"></div>
+    </div> -->
+</body>
+</html>

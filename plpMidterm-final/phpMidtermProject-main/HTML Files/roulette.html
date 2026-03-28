@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/058a85c92d.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../CSS_Files/roulette.css">
+    <title>Roulette Game</title>
+    <style>
+        /* ── Game History Modal ── */
+        .modal { display:flex; position:fixed; inset:0; z-index:10000; align-items:center; justify-content:center; background:rgba(0,0,0,0.75); }
+        .modal.hidden { display:none; }
+        .modal-content { background:#1a1a2e; border:2px solid #f0c040; border-radius:12px; padding:28px 24px; max-width:500px; width:95%; max-height:80vh; overflow-y:auto; color:white; position:relative; }
+        .modal-content h2 { text-align:center; color:#f0c040; margin-bottom:16px; }
+        .close-button { position:absolute; top:12px; right:16px; background:none; border:none; color:#ccc; font-size:24px; cursor:pointer; }
+        .close-button:hover { color:white; }
+        .modal-content table { width:100%; border-collapse:collapse; font-size:14px; }
+        .modal-content table th { background:#0d0d1f; color:#f0c040; padding:10px 12px; border-bottom:2px solid #f0c040; text-align:left; }
+        .modal-content table td { padding:8px 12px; border-bottom:1px solid #2a2a4a; }
+        .modal-content table tr:hover td { background:rgba(255,255,255,0.04); }
+    </style>
+</head>
+<body>
+    <nav class="nav-container">
+        <div>
+            <a href="homepage.html" class="circular-frame" style="font-size:25px;text-decoration:none;cursor:pointer;"><i class="fa-solid fa-house"></i></a>
+            <div class="circular-frame"><i style="color:aliceblue;font-size:25px;" class="fa-solid fa-volume"></i></div>
+        </div>
+        <div class="right-navigation">
+            <div class="name-currency">
+                <i class="fa-solid fa-user" style="margin:0 10px;"></i>
+                <p style="display:inline;padding-right:10px;font-size:14px;">Username1</p>
+                <i class="fa-solid fa-tv" id="watchAdNavBtn" title="Watch Ad for +100" style="margin:0 6px;cursor:pointer;color:#f0c040;font-size:16px;transition:transform 0.2s;" onclick="showAdPopup()"></i>
+            </div>
+            <div class="name-currency">
+                <p style="margin:0 10px;font-size:14px;" id="userBalance">0</p>
+            </div>
+            <div class="name-currency">
+                <p style="margin:0 10px;font-size:14px;" id="userElo">0</p>
+            </div>
+            <div class="hamburger-container">
+                <div class="circular-frame" id="hamburgerIcon"><i style="color:aliceblue;font-size:25px;" class="fa-solid fa-bars"></i></div>
+                <div class="dropdown-menu" id="dropdownMenu">
+                    <button class="dropdown-item" id="tutorialButton">Tutorial</button>
+                    <button class="dropdown-item">Game History</button>
+                    <button class="dropdown-item">Probability</button>
+                    <button class="dropdown-item">Logout</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="game-container">
+        <div class="game-rules box1" style="grid-area:left;">
+            <table style="border-collapse:collapse;">
+                <tr><th colspan="3" style="font-size:30px;">Game Rules</th></tr>
+                <tr><th>Betting Option</th><th>Description</th><th>Points</th></tr>
+                <tr><td>Low Bet</td><td>Numbers 1 - 15</td><td>x2</td></tr>
+                <tr><td>High Bet</td><td>Numbers 16 - 30</td><td>x2</td></tr>
+                <tr><td>Prime</td><td>2,3,5,7,11,13,17,19,23,29</td><td>x3</td></tr>
+                <tr><td>Odd</td><td>1,3,5,7,9,11,13,15,17,19,21,23,25,27,29</td><td>x2</td></tr>
+                <tr><td>Even</td><td>2,4,6,8,10,12,14,16,18,20,22,24,26,28,30</td><td>x2</td></tr>
+                <tr><td>Time Travel</td><td>Previous Winning Number</td><td>x30</td></tr>
+                <tr><td>Peak</td><td>Last number of the Wheel</td><td>x30</td></tr>
+                <tr><td>Valley</td><td>First number of the Wheel</td><td>x30</td></tr>
+                <tr><td>First Range</td><td>Numbers 1-10</td><td>x2</td></tr>
+                <tr><td>Second Range</td><td>Numbers 11-20</td><td>x2</td></tr>
+                <tr><td>Third Range</td><td>Numbers 21-30</td><td>x2</td></tr>
+                <tr><td>Lucky 7</td><td>The Number is 7 or divisible by 7</td><td>7=x20 / div by 7=x10</td></tr>
+            </table>
+        </div>
+
+        <div class="content" style="grid-area:middle;width:550px;">
+            <div class="roulette" style="height:450px;">
+                <h1>Roulette Wheel</h1>
+                <div style="position:relative;display:inline-block;">
+                    <div class="pointer"></div>
+                    <div class="roulette-wheel" id="wheel"></div>
+                </div>
+                <div class="result" id="result"></div>
+            </div>
+            <div class="betting-input box">
+                <form action="">
+                    <label>Bet Amount:</label>
+                    <input type="text" inputmode="decimal" placeholder="0.00" style="width:200px;margin:0 10px;height:25px;">
+                    <input type="submit" value="Submit" style="width:100px;height:25px;">
+                </form>
+            </div>
+        </div>
+
+        <div class="game-history box1" style="grid-area:right;">
+            <div class="game-options">
+                <div class="header-section" style="text-align:center;">
+                    <h2>Betting Options</h2>
+                </div>
+                <div class="game-buttons">
+                    <button type="button">Low Bet</button>
+                    <button type="button">High Bet</button>
+                    <button type="button">Prime</button>
+                    <button type="button">Odd</button>
+                    <button type="button">Even</button>
+                    <button type="button">Time Travel</button>
+                    <button type="button">Peak</button>
+                    <button type="button">Valley</button>
+                    <button type="button">First Range</button>
+                    <button type="button">Second Range</button>
+                    <button type="button">Third Range</button>
+                    <button type="button">Luck 7</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tutorial Modal -->
+    <div id="tutorialModal" class="tutorial-modal">
+        <div class="tutorial-overlay"></div>
+        <div class="tutorial-card">
+            <button class="tutorial-close-btn" id="closeModal">&times;</button>
+            <div class="tutorial-content"></div>
+            <div class="tutorial-slider-controls">
+                <button class="tutorial-arrow" id="prevSlide"><i class="fa-solid fa-chevron-left"></i></button>
+                <div class="tutorial-indicator"><span id="slideNumber">1</span> / <span>3</span></div>
+                <button class="tutorial-arrow" id="nextSlide"><i class="fa-solid fa-chevron-right"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Game History Modal -->
+    <div id="gameHistoryModal" class="modal hidden" style="display:none;">
+        <div class="modal-content">
+            <button class="close-button">&times;</button>
+            <h2>Roulette — Game History</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Result</th>
+                        <th>Landed Number</th>
+                        <th>Date Played</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td colspan="3" style="text-align:center;color:#aaa;">Click "Game History" to load records.</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Probability Modal -->
+    <div id="probabilityModal" class="modal hidden" style="display:none;">
+        <div class="modal-content" style="max-width:680px;">
+            <button class="close-button" id="closeProbabilityModal">&times;</button>
+            <h2>📊 Roulette — Probability</h2>
+            <p style="text-align:center;color:#aaa;font-size:13px;margin-bottom:14px;">Based on your game history (last 50 rounds)</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Betting Option</th>
+                        <th>Times Won</th>
+                        <th>Times Lost</th>
+                        <th>Win Rate</th>
+                        <th>Multiplier</th>
+                    </tr>
+                </thead>
+                <tbody id="probabilityTableBody">
+                    <tr><td colspan="5" style="text-align:center;color:#aaa;">Click "Probability" to load stats.</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="../JavaScript/roulette.js"></script>
+    <script src="../JavaScript/user-info.js"></script>
+</body>
+</html>

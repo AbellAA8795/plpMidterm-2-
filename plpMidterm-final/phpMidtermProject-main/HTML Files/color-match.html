@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../CSS_Files/color-matching.css">
+    <script src="https://kit.fontawesome.com/058a85c92d.js" crossorigin="anonymous"></script>
+    <title>Color Matching Game</title>
+    <style>
+        /* ── Game History Modal ── */
+        .modal { display:flex; position:fixed; inset:0; z-index:10000; align-items:center; justify-content:center; background:rgba(0,0,0,0.75); }
+        .modal.hidden { display:none; }
+        .modal-content { background:#1a1a2e; border:2px solid #f0c040; border-radius:12px; padding:28px 24px; max-width:700px; width:95%; max-height:80vh; overflow-y:auto; color:white; position:relative; }
+        .modal-content h2 { text-align:center; color:#f0c040; margin-bottom:16px; }
+        .close-button { position:absolute; top:12px; right:16px; background:none; border:none; color:#ccc; font-size:24px; cursor:pointer; }
+        .close-button:hover { color:white; }
+        .modal-content table { width:100%; border-collapse:collapse; font-size:14px; }
+        .modal-content table th { background:#0d0d1f; color:#f0c040; padding:10px 12px; border-bottom:2px solid #f0c040; text-align:left; }
+        .modal-content table td { padding:8px 12px; border-bottom:1px solid #2a2a4a; }
+        .modal-content table tr:hover td { background:rgba(255,255,255,0.04); }
+
+        /* ── Ad Popup already injected via JS ── */
+    </style>
+</head>
+<body>
+    
+    <nav class="nav-container">
+        <div>
+            <a href="homepage.html" class="circular-frame" style="font-size:25px;text-decoration:none;cursor:pointer;"><i class="fa-solid fa-house"></i></a>
+            <div class="circular-frame"><i style="color:aliceblue;font-size:25px;" class="fa-solid fa-volume"></i></div>
+        </div>
+        <div class="right-navigation">
+            <div class="name-currency">
+                <i class="fa-solid fa-user" style="margin:0 10px;"></i>
+                <p style="display:inline;padding-right:10px;font-size:14px;">Username1</p>
+                <i class="fa-solid fa-tv" id="watchAdNavBtn" title="Watch Ad for +100 CP" style="margin:0 6px;cursor:pointer;color:#f0c040;font-size:16px;transition:transform 0.2s;" onclick="showAdPopup()"></i>
+            </div>
+            <div class="name-currency">
+                <img src="../CSS_Files/Crystalline-Points.png" alt="" style="width:20px;height:20px;margin:0 10px;">
+                <p style="margin:0 10px;font-size:14px;" id="userBalance">0</p>
+            </div>
+            <div class="name-currency">
+                <p style="margin:0 10px;font-size:14px;" id="userElo">0</p>
+            </div>
+            <div class="hamburger-container">
+                <div class="circular-frame" id="hamburgerIcon"><i style="color:aliceblue;font-size:25px;" class="fa-solid fa-bars"></i></div>
+                <div class="dropdown-menu" id="dropdownMenu">
+                    <button class="dropdown-item" id="tutorialButton">Tutorial</button>
+                    <button class="dropdown-item">Game History</button>
+                    <button class="dropdown-item">Probability</button>
+                    <button class="dropdown-item">Logout</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="content">
+        <div class="left-container">
+            <div class="game-rules box1">
+                <h1 style="text-align:center;">Game Rules</h1>
+                <table style="border-collapse:collapse;">
+                    <tr>
+                        <th>Betting Option</th>
+                        <th>Description</th>
+                        <th>Crystaline Points</th>
+                    </tr>
+                    <tr><td>Red</td><td>At least 1 of the dice is red.</td><td rowspan="6">Matches:<br>1 match = x2 points<br>2 matches = x5 points<br>3 matches = x15 points</td></tr>
+                    <tr><td>Pink</td><td>At least 1 of the dice is pink.</td></tr>
+                    <tr><td>Yellow</td><td>At least 1 of the dice is yellow.</td></tr>
+                    <tr><td>Blue</td><td>At least 1 of the dice is blue.</td></tr>
+                    <tr><td>Green</td><td>At least 1 of the dice is green.</td></tr>
+                    <tr><td>White</td><td>At least 1 of the dice is white.</td></tr>
+                </table>
+            </div>
+            <div class="game-bet-amount box1">
+                <h2 style="text-align:center;margin-bottom:10px;">Bet Amount</h2>
+                <form id="betForm">
+                    <label for="betAmount">Enter Amount:</label>
+                    <input type="text" id="betAmount" required inputmode="decimal" placeholder="0.00">
+                    <input type="submit" value="Submit">
+                </form>
+            </div>
+        </div>
+        <div class="right-container">
+            <div class="game-inaction box">
+                <h3 style="text-align:center;margin-bottom:20px;">Game In Action</h3>
+                <div class="dice-container">
+                    <div class="dice" id="color1" style="background-color:#888;"></div>
+                    <div class="dice" id="color2" style="background-color:#888;"></div>
+                    <div class="dice" id="color3" style="background-color:#888;"></div>
+                </div>
+            </div>
+            <div class="game-options box1">
+                <h1 style="text-align:center;">Game Options</h1>
+                <div class="options-container">
+                    <div class="options game-button" data-color="red"    style="grid-area:opt1;background-color:red;   cursor:pointer;transition:all 0.3s ease;"><h2>Red</h2></div>
+                    <div class="options game-button" data-color="pink"   style="grid-area:opt2;background-color:pink;  cursor:pointer;transition:all 0.3s ease;"><h2>Pink</h2></div>
+                    <div class="options game-button" data-color="yellow" style="grid-area:opt3;background-color:yellow;cursor:pointer;transition:all 0.3s ease;"><h2 style="color:black;">Yellow</h2></div>
+                    <div class="options game-button" data-color="blue"   style="grid-area:opt4;background-color:blue;  cursor:pointer;transition:all 0.3s ease;"><h2>Blue</h2></div>
+                    <div class="options game-button" data-color="green"  style="grid-area:opt5;background-color:green; cursor:pointer;transition:all 0.3s ease;"><h2>Green</h2></div>
+                    <div class="options game-button" data-color="white"  style="grid-area:opt6;background-color:white; cursor:pointer;transition:all 0.3s ease;"><h2 style="color:black;">White</h2></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tutorial Modal -->
+    <div id="tutorialModal" class="tutorial-modal">
+        <div class="tutorial-overlay"></div>
+        <div class="tutorial-card">
+            <button class="tutorial-close-btn" id="closeModal">&times;</button>
+            <div class="tutorial-content"></div>
+            <div class="tutorial-slider-controls">
+                <button class="tutorial-arrow" id="prevSlide"><i class="fa-solid fa-chevron-left"></i></button>
+                <div class="tutorial-indicator"><span id="slideNumber">1</span> / <span>3</span></div>
+                <button class="tutorial-arrow" id="nextSlide"><i class="fa-solid fa-chevron-right"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Game History Modal -->
+    <div id="gameHistoryModal" class="modal hidden" style="display:none;">
+        <div class="modal-content">
+            <button class="close-button">&times;</button>
+            <h2> Color Match — Game History</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Result</th>
+                        <th>Color 1</th>
+                        <th>Color 2</th>
+                        <th>Color 3</th>
+                        <th>Date Played</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td colspan="5" style="text-align:center;color:#aaa;">Click "Game History" to load records.</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Probability Modal -->
+    <div id="probabilityModal" class="modal hidden" style="display:none;">
+        <div class="modal-content">
+            <button class="close-button" id="closeProbabilityModal">&times;</button>
+            <h2>📊 Color Match — Probability</h2>
+            <p style="text-align:center;color:#aaa;font-size:13px;margin-bottom:14px;">Based on your game history (last 50 rounds)</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Color</th>
+                        <th>Times Appeared</th>
+                        <th>Appearance Rate</th>
+                        <th>Win Rate (if bet)</th>
+                    </tr>
+                </thead>
+                <tbody id="probabilityTableBody">
+                    <tr><td colspan="4" style="text-align:center;color:#aaa;">Click "Probability" to load stats.</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="../JavaScript/color-match.js"></script>
+    <script src="../JavaScript/user-info.js"></script>
+</body>
+</html>

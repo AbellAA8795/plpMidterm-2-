@@ -1,0 +1,637 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    /*background: radial-gradient(circle at top, #3c0000, #000);*/
+    background-image: conic-gradient(rgba(0,0,0,0.2),rgba(0,0,0,0.2)),url("../CSS_Files/casino.png");
+    background-size: cover;
+    background-position: center;
+    font-family: 'Inter', sans-serif;
+    height: 100vh;
+    color: white;
+    overflow-y: hidden;
+}
+/* NAVIGATION */
+.nav-container {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 70px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 2rem;
+    background: transparent;
+    
+    z-index: 10;
+}
+.right-navigation{
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+}
+.circular-frame {
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(5px);
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 10px;
+    cursor: pointer;
+}
+.name-currency{
+    width: auto;
+    height: 40px;
+    margin-right: 20px;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: white;
+    display: inline-flex;
+    justify-items: space-evenly;
+    align-items: center;
+}
+/* MAIN LAYOUT */
+.game-container {
+    display: grid;
+    grid-template-areas: 
+    "left left middle middle right right";
+    align-items: center;
+    width: 100%;
+    justify-content: center;
+    height: 100%;
+    gap: 50px;
+}
+
+.box{
+    background: rgba(85, 85, 85, 0.2);
+    box-shadow: 0PX 2PX 10px rgb(0, 0, 0);
+    backdrop-filter: blur(20px);
+    width: auto;
+    height: 600px;
+    margin-top: 40px;
+}
+
+.box1{
+    
+    backdrop-filter: blur(20px);
+    width: auto;
+    height: 600px;
+    margin-top: 40px;
+    border-radius: 20px;
+    padding: 3px;
+    position: relative;
+    overflow: hidden;
+}
+
+.box1::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 20px;
+    background-image: conic-gradient(red, yellow, lime, cyan, blue, magenta, red);
+    overflow: hidden;
+    z-index: -1;
+    animation: rainbow-spin 3s linear infinite;
+}
+
+.box1::after {
+    content: '';
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    right: 3px;
+    bottom: 3px;
+    background: #382d5f;
+    border-radius: 20px;
+    z-index: -1;
+    overflow: hidden;
+}
+
+@keyframes rainbow-spin {
+    to {
+        filter: hue-rotate(360deg);
+    }
+}
+
+.game-rules{
+    position: relative;
+    width: 450px;
+    display: flex;
+    padding: 20px;
+    flex-direction: column;
+    border-radius: 10px;
+}
+
+.game-rules table,
+.game-rules tr,
+.game-rules td,
+.game-rules th {
+    font-size: 13px;
+}
+
+.game-rules table,tr,td,th{
+    font-size: 13px;
+    padding: 7px 10px;
+}
+
+
+
+.game-rules table{
+    border-collapse: collapse;
+    height: 100%;
+}
+
+.game-history{
+    width: 400px;
+    border-radius: 10px;
+}
+
+.game-options{
+    display: flex;
+    flex-direction: column;
+}
+
+.game-options .header-section{
+    padding-top: 10px;
+    width: 100%;
+    height: 45px;
+}
+
+.game-buttons button{
+    
+    width: 100%;
+    height: 45px;
+    background-color: transparent;
+    border: none;
+    color: aliceblue;
+    transition: .1s ease;
+    cursor: pointer;
+}
+
+.game-buttons button:hover{
+    background-color: white;
+    color: black;
+}
+
+.game-buttons button.active {
+    background-color: #00ff00;
+    color: black;
+    font-weight: bold;
+}
+
+.roulette {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.roulette-wheel {
+    width: 400px;
+    height: 400px;
+    border-radius: 50%;
+    background: conic-gradient(
+        from 270deg,
+        #ff0000 0deg 12deg,
+        #000000 12deg 24deg,
+        #ff0000 24deg 36deg,
+        #000000 36deg 48deg,
+        #ff0000 48deg 60deg,
+        #000000 60deg 72deg,
+        #ff0000 72deg 84deg,
+        #000000 84deg 96deg,
+        #ff0000 96deg 108deg,
+        #000000 108deg 120deg,
+        #ff0000 120deg 132deg,
+        #000000 132deg 144deg,
+        #ff0000 144deg 156deg,
+        #000000 156deg 168deg,
+        #ff0000 168deg 180deg,
+        #000000 180deg 192deg,
+        #ff0000 192deg 204deg,
+        #000000 204deg 216deg,
+        #ff0000 216deg 228deg,
+        #000000 228deg 240deg,
+        #ff0000 240deg 252deg,
+        #000000 252deg 264deg,
+        #ff0000 264deg 276deg,
+        #000000 276deg 288deg,
+        #ff0000 288deg 300deg,
+        #000000 300deg 312deg,
+        #ff0000 312deg 324deg,
+        #000000 324deg 336deg,
+        #ff0000 336deg 348deg,
+        #000000 348deg 360deg
+    );
+    border: 8px solid #333;
+    cursor: pointer;
+    position: relative;
+    transition: transform 0.1s ease-out;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
+}
+
+.roulette-wheel.spinning {
+    animation: spin 3s linear forwards;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(1800deg);
+    }
+}
+
+.roulette-wheel::before {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: #333;
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+}
+
+.pointer {
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    border-top: 30px solid grey;
+    filter: drop-shadow(0 0 0 2px white);
+    z-index: 5;
+}
+
+.numbers-container {
+    position: relative;
+    width: 400px;
+    height: 400px;
+    margin: 0 auto;
+}
+
+.number {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 18px;
+    color: #333;
+}
+
+h1 {
+    color: white;
+    margin-bottom: 40px;
+}
+
+.result {
+    color: white;
+    font-size: 24px;
+    margin-top: 40px;
+    min-height: 30px;
+}
+
+/* HAMBURGER MENU & DROPDOWN */
+.hamburger-container {
+    position: relative;
+}
+
+#hamburgerIcon {
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#hamburgerIcon:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.dropdown-menu {
+    position: fixed;
+    top: 80px;
+    right: 20px;
+    width: 300px;
+    height: auto;
+    background: rgba(85, 85, 85, 0.95);
+    backdrop-filter: blur(20px);
+    border-radius: 10px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    overflow: hidden;
+    opacity: 0;
+    visibility: hidden;
+    transform: scale(0.8);
+    transition: all 0.3s ease;
+    z-index: 1001;
+    transform-origin: top right;
+}
+
+.dropdown-menu.active {
+    opacity: 1;
+    visibility: visible;
+    transform: scale(1);
+}
+
+.dropdown-item {
+    width: 100%;
+    padding: 15px 20px;
+    border: none;
+    background: transparent;
+    color: aliceblue;
+    font-size: 16px;
+    text-align: left;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.dropdown-item:last-child {
+    border-bottom: none;
+}
+
+.dropdown-item:hover {
+    background: rgba(255, 255, 255, 0.2);
+    padding-left: 30px;
+}
+
+/* TUTORIAL MODAL */
+.tutorial-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2000;
+}
+
+.tutorial-modal.active {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.tutorial-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(3px);
+}
+
+.tutorial-card {
+    position: relative;
+    z-index: 2001;
+    background: rgba(56, 45, 95, 0.95);
+    backdrop-filter: blur(20px);
+    border-radius: 20px;
+    padding: 40px;
+    width: 90%;
+    max-width: 700px;
+    min-height: 500px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.tutorial-close-btn {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    background: transparent;
+    border: none;
+    font-size: 32px;
+    color: white;
+    cursor: pointer;
+    transition: color 0.3s ease;
+    padding: 0;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.tutorial-close-btn:hover {
+    color: #ff6b6b;
+}
+
+.tutorial-content {
+    min-height: 350px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 16px;
+    line-height: 1.6;
+    margin: 30px 0;
+    gap: 30px;
+}
+
+.tutorial-slider-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.tutorial-arrow {
+    background: rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: white;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.3s ease;
+}
+
+.tutorial-arrow:hover {
+    background: rgba(255, 255, 255, 0.4);
+    transform: scale(1.1);
+}
+
+.tutorial-arrow:active {
+    transform: scale(0.95);
+}
+
+.tutorial-indicator {
+    font-size: 16px;
+    color: white;
+    font-weight: bold;
+    min-width: 80px;
+    text-align: center;
+}
+
+#slideNumber {
+    color: #00ff00;
+    font-weight: bold;
+}
+
+/* Game History Modal */
+.modal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 1000;
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.modal.hidden {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.modal-content {
+    background: rgba(56, 45, 95, 0.95);
+    position: relative;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    color: white;
+    max-width: 900px;
+    width: 90%;
+    height: 500px;
+}
+
+.close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 30px;
+    color: white;
+    cursor: pointer;
+    width: 50px;
+    height: 50px;
+    transition: color 0.3s ease;
+}
+
+.close-button:hover {
+    color: #ff6b6b;
+}
+
+.table-container {
+    margin-top: 20px;
+    width: 80%;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.modal-content table {
+    width: 100%;
+    color: #000;
+    border-collapse: collapse;
+}
+
+.modal-content thead {
+    background: linear-gradient(to right, #6a11cb, #2575fc);
+    color: white;
+}
+
+.modal-content th, .modal-content td {
+    padding: 12px 15px;
+    text-align: left;
+}
+
+.modal-content tbody tr{
+    background-color: #f2f2f2;
+}
+
+.modal-content th {
+    font-weight: bold;
+}
+
+
+.betting-input{
+    width: 550px; 
+    height: 70px; 
+    border-radius: 10px; 
+    display: inline-flex; 
+    justify-content: space-evenly; 
+    align-items: center;
+}
+
+.betting-input input[type="Text"]{
+    width: 100%;
+    height: 30px;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: white;
+    display: inline-flex;
+    justify-items: space-evenly;
+    align-items: center;
+}
+
+.betting-input input[type = "submit"]{
+    width: 100%;
+    height: 30px;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: white;
+    display: inline-flex;
+    justify-items: space-evenly;
+    align-items: center;
+    margin-top: 10px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.betting-input input[type = "submit"]:hover{
+    background: rgba(255, 255, 255, 0.4);
+    
+}
+

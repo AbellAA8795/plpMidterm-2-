@@ -1,0 +1,77 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../CSS_Files/homes.css">
+    <script src="https://kit.fontawesome.com/058a85c92d.js" crossorigin="anonymous"></script>
+    <title>Homepage</title>
+</head>
+<body>
+        <nav class="nav-container">
+        <div>
+            <div class="circular-frame"><i style="color: aliceblue; font-size: 25px; " class="fa-solid fa-bars"></i></div>
+            <div id="musicBtn" onclick="toggleMusic()" class="circular-frame"><i class="fa-solid fa-volume-xmark"></i></div>
+            
+               <audio id="bgMusic" loop>
+                    <source src="../HTML Files/Saffron.mp3" type="audio/mpeg">
+               </audio>
+        </div>
+        
+        
+        <div>
+            <div class="name-currency">
+                <i class="fa-solid fa-user" style="margin: 0 10px;"></i>
+                <p style="display: inline; padding-right: 10px; font-size: 14px;" >Loading...</p> 
+                
+            </div>
+            <div class="name-currency">
+                <p style="margin: 0 10px; font-size: 14px;">0</p>  
+            </div>    
+            <div class="name-currency">
+                <p style="margin: 0 10px; font-size: 14px;">0 pts</p>  
+            </div>
+            <div class="circular-frame" onclick="logout()" style="cursor: pointer;">
+                <i class="fa-solid fa-sign-out-alt"></i>
+            </div>
+        </div>
+        
+        </nav>
+    <div class="grid-parent">
+        <div class="content">
+            <h1 class="app-title">WELCOME PLAYER</h1>
+            
+            <a href="roulette.html" style="font-style: none;"><button class="pixel-button">ROULETTE</button></a>
+            <a href="color-match.html" style="font-style: none;"><button class="pixel-button">COLOR MATCHING</button></a>
+            <a href="dice.html" style="font-style: none;"><button class="pixel-button">DICE PATTERN</button></a>
+        </div>
+    </div>
+
+    <script>
+        const music = document.getElementById("bgMusic");
+        const btn = document.getElementById("musicBtn");
+
+        function toggleMusic() {
+            if (music.paused) {
+                music.play();
+                btn.innerHTML = '<i class="fa-solid fa-volume-high"></i>';
+            } else {
+                music.pause();
+                btn.innerHTML = '<i class="fa-solid fa-volume-xmark"></i>';
+            }
+        }
+
+        function logout() {
+            // Destroy session and redirect to login
+            fetch('../PHP_Files/logout.php', {
+                method: 'POST',
+                credentials: 'include'
+            })
+            .then(() => {
+                window.location.href = 'index.html';
+            });
+        }
+    </script>
+    <script src="../JavaScript/user-info.js"></script>
+</body>
+</html>
